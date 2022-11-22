@@ -2,7 +2,6 @@ package com.waa.property_management_portal.entity.dto.request;
 
 import lombok.Builder;
 import lombok.Data;
-import org.springframework.lang.NonNull;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
