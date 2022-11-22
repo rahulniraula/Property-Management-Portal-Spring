@@ -1,5 +1,6 @@
 package com.waa.property_management_portal.entity;
 
+import com.waa.property_management_portal.enums.PropertyType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,7 @@ public class Property {
     private double price;
     private String title;
     private double area;
-    private String propertyType;
+    private PropertyType propertyType;
 
     @OneToOne
     private Address address;
