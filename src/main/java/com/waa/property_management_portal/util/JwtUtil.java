@@ -3,7 +3,6 @@ package com.waa.property_management_portal.util;
 import io.jsonwebtoken.*;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +12,6 @@ import java.util.function.Function;
 public class JwtUtil {
     private final String secret = "top-secret";
     private final long expiration = 5 * 60 * 60 * 60;
-    //     private final long expiration = 5;
     private final long refreshExpiration = 5 * 60 * 60 * 60 * 60;
 
     public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
@@ -105,17 +103,12 @@ public class JwtUtil {
         return false;
     }
 
-
-
-
-
     public String doGenerateRefreshToken(Map<String, Object> claims, String subject) {
 
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + expiration))
                 .signWith(SignatureAlgorithm.HS512, secret).compact();
     }
-
 
     public String getUsernameFromToken(String token) {
         String result = null;
