@@ -11,20 +11,16 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class PropertyDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String firstName;
-    private String middleName;
-    private String lastName;
-    // if need another entity will be declared later
-    private String address;
-    private String contact;
-    private String email;
-    private String password;
+    private int noOfRooms;
     @Temporal(TemporalType.DATE)
-    private Date creationDate;
-    private Byte status;
-
+    private Date buildDate;
+    private String heatingSystem;
+    private String coolingSystem;
+    private String parking;
+    private String description;
+    private int noOfViews;
 }

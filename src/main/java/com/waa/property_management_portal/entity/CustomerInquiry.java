@@ -11,20 +11,13 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class CustomerInquiry {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String firstName;
-    private String middleName;
-    private String lastName;
-    // if need another entity will be declared later
-    private String address;
-    private String contact;
+    private String fullName;
     private String email;
-    private String password;
-    @Temporal(TemporalType.DATE)
-    private Date creationDate;
-    private Byte status;
-
+    private String phone;
+    private String message;
+    // private long userId;
 }
