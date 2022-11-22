@@ -7,6 +7,8 @@ import com.waa.property_management_portal.service.AuthService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/v1/authenticate")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -18,8 +20,8 @@ public class AuthController {
         this.authService = authService;
     }
 
-    @PostMapping
-    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
+    @PostMapping("login")
+    public ResponseEntity<?> login(@Valid @RequestBody LoginRequest loginRequest) {
         var loginResponse = authService.login(loginRequest);
         return ResponseEntity.ok().body(loginResponse);
     }
