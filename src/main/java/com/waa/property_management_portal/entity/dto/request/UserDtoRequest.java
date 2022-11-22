@@ -1,5 +1,6 @@
 package com.waa.property_management_portal.entity.dto.request;
 
+import com.waa.property_management_portal.enums.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,14 +14,18 @@ import javax.validation.constraints.NotEmpty;
 @AllArgsConstructor
 public class UserDtoRequest {
     private long id;
-    @Email @NotEmpty
+    @Email(message = "Please enter a valid email message")
+    @NotEmpty(message = "Email field cannot be empty")
     private String email;
-    @NotEmpty
-    private String firstname;
-    @NotEmpty
-    private String lastname;
-    @NotEmpty
+    @NotEmpty(message = "First Name cannot be empty")
+    private String firstName;
+    @NotEmpty(message = "Last Name cannot be Empty")
+    private String lastName;
+    @NotEmpty(message = "Phone number cannot be empty")
     private String phoneNumber;
-    @NotEmpty @Min(4)
+    @NotEmpty(message = "Password cannot be empty")
+    @Min(message = "Password cannot be less than 4", value = 4)
     private String password;
+//    @NotEmpty(message = "Please provide user role")
+    private UserRole role;
 }

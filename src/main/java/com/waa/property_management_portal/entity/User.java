@@ -8,6 +8,7 @@ import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -34,8 +35,12 @@ public class User {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable
-    private List<Role> roles;
+    private List<Role> roles=new ArrayList<>();
 
     @OneToMany(mappedBy = "owner")
     private List<Property> properties;
+
+    public void addRole(Role role){
+        this.roles.add(role);
+    }
 }

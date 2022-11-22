@@ -2,10 +2,12 @@ package com.waa.property_management_portal.service.impl;
 
 import com.waa.property_management_portal.entity.User;
 import com.waa.property_management_portal.entity.dto.request.UserDtoRequest;
+import com.waa.property_management_portal.repository.RoleRepository;
 import com.waa.property_management_portal.repository.UserRepo;
 import com.waa.property_management_portal.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +19,11 @@ public class UserServiceImpl implements UserService {
     private UserRepo userRepo;
     @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private RoleRepository roleRepository;
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public List<UserDtoRequest> findAll() {
@@ -37,7 +44,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User save(UserDtoRequest u) {
         User user = modelMapper.map(u, User.class);
-
+        user.setPassword(passwordEncoder.encode(u.getPassword()));
         return userRepo.save(user);
     }
 
@@ -45,8 +52,8 @@ public class UserServiceImpl implements UserService {
     public void update(long id, UserDtoRequest user) {
         User userToUpdate = userRepo.findById(id);
         if (userToUpdate != null) {
-            userToUpdate.setFirstname(user.getFirstname());
-            userToUpdate.setLastname(user.getLastname());
+            userToUpdate.setFirstname(user.getFirstName());
+            userToUpdate.setLastname(user.getLastName());
             userToUpdate.setEmail(user.getEmail());
             userToUpdate.setPhoneNumber(user.getPhoneNumber());
             userToUpdate.setPassword(user.getPassword());
