@@ -42,6 +42,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void update(long id, UserDto user) {
-        //TODO:
+        User userToUpdate = userRepo.findById(id);
+        if (userToUpdate != null) {
+            userToUpdate.setFirstname(user.getFirstname());
+            userToUpdate.setLastname(user.getLastname());
+            userToUpdate.setEmail(user.getEmail());
+            userToUpdate.setPhoneNumber(user.getPhoneNumber());
+            userToUpdate.setPassword(user.getPassword());
+        }
     }
 }
