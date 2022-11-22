@@ -1,6 +1,6 @@
 package com.waa.property_management_portal.controller;
 
-import com.waa.property_management_portal.entity.dto.UserDto;
+import com.waa.property_management_portal.entity.dto.request.UserDto;
 import com.waa.property_management_portal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

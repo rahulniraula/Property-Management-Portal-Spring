@@ -1,6 +1,6 @@
 package com.waa.property_management_portal.service;
 
-import com.waa.property_management_portal.entity.dto.UserDto;
+import com.waa.property_management_portal.entity.dto.request.UserDto;
 import java.util.List;
 
 public interface UserService {
