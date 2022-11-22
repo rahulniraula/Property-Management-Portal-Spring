@@ -1,16 +1,17 @@
 package com.waa.property_management_portal.service;
 
-import com.waa.property_management_portal.entity.dto.request.UserDto;
+import com.waa.property_management_portal.entity.User;
+import com.waa.property_management_portal.entity.dto.request.UserDtoRequest;
 import java.util.List;
 
 public interface UserService {
-    List<UserDto> findAll();
+    List<UserDtoRequest> findAll();
 
-    UserDto findById(long id);
+    UserDtoRequest findById(long id);
 
     void deleteById(long id);
 
-    void save(UserDto u);
+    User save(UserDtoRequest u);
 
-    void update(long id, UserDto user);
+    void update(long id, UserDtoRequest user);
 }

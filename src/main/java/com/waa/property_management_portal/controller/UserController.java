@@ -1,6 +1,6 @@
 package com.waa.property_management_portal.controller;
 
-import com.waa.property_management_portal.entity.dto.request.UserDto;
+import com.waa.property_management_portal.entity.dto.request.UserDtoRequest;
 import com.waa.property_management_portal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,23 +16,23 @@ public class UserController {
 
     @GetMapping("/")
     @ResponseStatus(HttpStatus.OK)
-    public List<UserDto> getAllUsers(){
+    public List<UserDtoRequest> getAllUsers(){
         return userService.findAll();
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public UserDto getUserById(@PathVariable("id") Long id){
+    public UserDtoRequest getUserById(@PathVariable("id") Long id){
         return userService.findById(id);
     }
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addUser(@RequestBody UserDto userDto){
-        userService.save(userDto);
+    public void addUser(@RequestBody UserDtoRequest userDtoRequest){
+        userService.save(userDtoRequest);
     }
     @PutMapping("/{id}")
-    public void updateUser(@RequestBody UserDto user, @PathVariable("id") long id){
+    public void updateUser(@RequestBody UserDtoRequest user, @PathVariable("id") long id){
         userService.update(id, user);
     }
 

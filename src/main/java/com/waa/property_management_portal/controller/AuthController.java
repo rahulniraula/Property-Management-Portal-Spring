@@ -2,7 +2,9 @@ package com.waa.property_management_portal.controller;
 
 import com.waa.property_management_portal.entity.dto.request.LoginRequest;
 import com.waa.property_management_portal.entity.dto.request.RefreshTokenRequest;
+import com.waa.property_management_portal.entity.dto.request.UserDtoRequest;
 import com.waa.property_management_portal.entity.dto.response.LoginResponse;
+import com.waa.property_management_portal.entity.dto.response.UserDtoResponse;
 import com.waa.property_management_portal.service.AuthService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +31,11 @@ public class AuthController {
     @PostMapping("/refreshToken")
     public LoginResponse refreshToken(@RequestBody RefreshTokenRequest refreshTokenRequest){
         return authService.refreshToken(refreshTokenRequest);
+    }
+
+    @PostMapping("/register")
+    public UserDtoResponse registerUser(@Valid @RequestBody UserDtoRequest user) {
+        return authService.registerUser(user);
     }
 
 }
