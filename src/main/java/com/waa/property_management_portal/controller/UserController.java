@@ -12,8 +12,11 @@ import java.util.List;
 @RequestMapping("/api/v1/users")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserController {
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/")
     @ResponseStatus(HttpStatus.OK)
