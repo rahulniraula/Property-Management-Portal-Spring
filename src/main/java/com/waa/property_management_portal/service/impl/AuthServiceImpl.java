@@ -43,8 +43,8 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public LoginResponse login(LoginRequest loginRequest){
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getEmail(),
-                        loginRequest.getPassword())
+                    new UsernamePasswordAuthenticationToken(loginRequest.getEmail(),
+                            loginRequest.getPassword())
         );
         final UserDetails userDetails = userDetailsService
                 .loadUserByUsername(loginRequest.getEmail());
