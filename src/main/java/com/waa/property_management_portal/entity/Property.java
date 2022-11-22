@@ -25,4 +25,7 @@ public class Property {
 
     @ManyToOne
     private User owner;
+
+    @OneToOne
+    private PropertyDetails details;
 }
