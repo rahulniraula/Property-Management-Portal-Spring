@@ -9,7 +9,6 @@ import org.springframework.data.annotation.CreatedDate;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -43,4 +42,7 @@ public class User {
     public void addRole(Role role){
         this.roles.add(role);
     }
+
+    @OneToMany
+    List<Favorite> favourites;
 }
