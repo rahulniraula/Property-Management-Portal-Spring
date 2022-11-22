@@ -27,4 +27,7 @@ public class PropertyDetails {
     private String description;
     private long noOfViews;
 
+    @OneToOne
+    private Property property;
+
 }
