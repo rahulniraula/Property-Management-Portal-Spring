@@ -12,6 +12,10 @@ INSERT INTO role (id, role)
 VALUES (1, 'ADMIN');
 INSERT INTO role (id, role)
 VALUES (2, 'CUSTOMER');
+INSERT INTO role (id, role)
+VALUES (3, 'OWNER');
+INSERT INTO role (id, role)
+VALUES (4, 'VIEWER');
 
 INSERT INTO users_roles (user_id, roles_id)
 VALUES (111, 1);
