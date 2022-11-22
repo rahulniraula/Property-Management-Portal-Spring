@@ -1,6 +1,11 @@
 package com.waa.property_management_portal.util;
 
+import com.waa.property_management_portal.entity.User;
+import com.waa.property_management_portal.entity.dto.response.UserDtoResponse;
+import com.waa.property_management_portal.repository.UserRepo;
 import io.jsonwebtoken.*;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import java.util.Date;
@@ -13,6 +18,10 @@ public class JwtUtil {
     private final String secret = "top-secret";
     private final long expiration = 5 * 60 * 60 * 60;
     private final long refreshExpiration = 5 * 60 * 60 * 60 * 60;
+    @Autowired
+    private UserRepo userRepo;
+    @Autowired
+    private ModelMapper modelMapper;
 
     public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = getAllClaimsFromToken(token);
@@ -42,6 +51,8 @@ public class JwtUtil {
 
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
+        User user=userRepo.findByEmail(userDetails.getUsername());
+        claims.put("user",modelMapper.map(user, UserDtoResponse.class));
         return doGenerateToken(claims, userDetails.getUsername());
     }
 
