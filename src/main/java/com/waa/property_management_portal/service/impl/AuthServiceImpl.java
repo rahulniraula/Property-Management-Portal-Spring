@@ -25,8 +25,9 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Slf4j
 public class AuthServiceImpl implements AuthService {
-
+    @Autowired
     private final AuthenticationManager authenticationManager;
+    @Autowired
     private final UserDetailsService userDetailsService;
 
     @Autowired
@@ -40,19 +41,13 @@ public class AuthServiceImpl implements AuthService {
     private final JwtUtil jwtUtil;
 
     @Override
-    public LoginResponse login(LoginRequest loginRequest) {
-        try {
-            var result = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(loginRequest.getEmail(),
-                            loginRequest.getPassword())
-            );
-        } catch (BadCredentialsException e) {
-            log.info("Bad Credentials");
-        }
-
+    public LoginResponse login(LoginRequest loginRequest){
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginRequest.getEmail(),
+                        loginRequest.getPassword())
+        );
         final UserDetails userDetails = userDetailsService
                 .loadUserByUsername(loginRequest.getEmail());
-
         final String accessToken = jwtUtil.generateToken(userDetails);
         final String refreshToken = jwtUtil.generateRefreshToken(loginRequest.getEmail());
         return new LoginResponse(accessToken, refreshToken);
