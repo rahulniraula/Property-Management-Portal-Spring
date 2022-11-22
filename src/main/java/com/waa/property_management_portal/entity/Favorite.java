@@ -18,6 +18,6 @@ public class Favorite {
     private String name;
 
     @ManyToMany
-    List<Property> favProperties;
+    List<Property> properties;
 
 }

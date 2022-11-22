@@ -44,5 +44,5 @@ public class User {
     }
 
     @OneToMany
-    List<Favorite> favoriteList;
+    List<Favorite> favourites;
 }
