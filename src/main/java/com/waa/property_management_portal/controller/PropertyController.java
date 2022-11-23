@@ -1,9 +1,7 @@
 package com.waa.property_management_portal.controller;
 
-import com.waa.property_management_portal.entity.Property;
 import com.waa.property_management_portal.entity.dto.request.PropertyDto;
 import com.waa.property_management_portal.service.PropertyService;
-import com.waa.property_management_portal.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

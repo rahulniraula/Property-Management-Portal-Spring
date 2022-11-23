@@ -9,7 +9,6 @@ import com.waa.property_management_portal.repository.RoleRepository;
 import com.waa.property_management_portal.repository.UserRepo;
 import com.waa.property_management_portal.service.UserService;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,20 +17,22 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
-    @Autowired
-    private UserRepo userRepo;
-    @Autowired
-    private ModelMapper modelMapper;
+    private final UserRepo userRepo;
+    private final ModelMapper modelMapper;
+    private final RoleRepository roleRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
 
-    @Autowired
-    private RoleRepository roleRepository;
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+    public UserServiceImpl(UserRepo userRepo, ModelMapper modelMapper, RoleRepository roleRepository, BCryptPasswordEncoder passwordEncoder) {
+        this.userRepo = userRepo;
+        this.modelMapper = modelMapper;
+        this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Override
     public List<UserDtoResponse> findAll() {
         return userRepo.findAll().stream()
-                .map(p -> modelMapper.map(p, UserDtoResponse.class))
+                .map(u -> modelMapper.map(u, UserDtoResponse.class))
                 .collect(Collectors.toList());
     }
 

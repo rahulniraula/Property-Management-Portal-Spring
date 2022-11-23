@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -28,4 +29,7 @@ public class Property {
 
     @OneToOne(mappedBy = "property", fetch = FetchType.EAGER)
     private PropertyDetails details;
+
+    @OneToMany(mappedBy = "property")
+    private List<Image> images;
 }
