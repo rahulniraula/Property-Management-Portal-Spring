@@ -64,8 +64,8 @@ public class PropertyServiceImpl implements PropertyService {
         User u = userRepo.findByEmail(user.getUsername());
         Property property = modelMapper.map(p, Property.class);
         property.setOwner(u);
-        property.setAddress(modelMapper.map(p.getAddress(), Address.class));
-        property.setDetails(modelMapper.map(p.getDetails(), PropertyDetails.class));
+//        property.setAddress(modelMapper.map(p.getAddress(), Address.class));
+        property.setDetails(modelMapper.map(p, PropertyDetails.class));
         propertyRepo.save(property);
     }
 

@@ -5,6 +5,9 @@ import com.waa.property_management_portal.enums.PropertyType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.List;
@@ -31,7 +34,7 @@ public class Property {
     @ManyToOne
     private User owner;
 
-    @OneToOne(mappedBy = "property", fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL,mappedBy = "property",fetch = FetchType.EAGER)
     private PropertyDetails details;
 
     @OneToMany(mappedBy = "property")
