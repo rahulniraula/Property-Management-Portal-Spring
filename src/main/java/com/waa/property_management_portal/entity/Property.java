@@ -20,7 +20,9 @@ public class Property {
     private String title;
     private double price;
     private double area;
+    @Enumerated(EnumType.STRING)
     private PropertyType propertyType;
+    @Enumerated(EnumType.STRING)
     private PropertyStatus propertyStatus;
 
     @OneToOne
