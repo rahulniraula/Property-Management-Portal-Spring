@@ -32,7 +32,7 @@ public class PropertyController {
     }
 
     @PutMapping("/{id}/{status}")
-    public void udpateStatus(@PathVariable long id, @PathVariable PropertyStatus status) {
-        propertyService.updateStaus(id, status);
+    public void updateStatus(@PathVariable long id, @PathVariable PropertyStatus status) {
+        propertyService.updateStatus(id, status);
     }
 }

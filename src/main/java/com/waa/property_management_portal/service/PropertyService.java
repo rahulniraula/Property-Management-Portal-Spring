@@ -21,5 +21,5 @@ public interface PropertyService {
 
     void addProperty(AwesomeUserDetails user, PropertyDtoReq property);
 
-    void updateStaus(long id, PropertyStatus status);
+    void updateStatus(long id, PropertyStatus status);
 }

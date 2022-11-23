@@ -66,7 +66,7 @@ public class PropertyServiceImpl implements PropertyService {
     }
 
     @Override
-    public void updateStaus(long id, PropertyStatus status) {
+    public void updateStatus(long id, PropertyStatus status) {
         Property property = propertyRepo.findById(id);
         property.setPropertyStatus(status);
         propertyRepo.save(property);
