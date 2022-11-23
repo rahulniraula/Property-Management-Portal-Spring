@@ -6,8 +6,10 @@ import com.waa.property_management_portal.enums.PropertyStatus;
 import com.waa.property_management_portal.service.PropertyService;
 import com.waa.property_management_portal.service.impl.AwesomeUserDetails;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -27,7 +29,7 @@ public class PropertyController {
     }
 
     @PostMapping("/")
-    public void addProperty(@AuthenticationPrincipal AwesomeUserDetails user, @RequestBody PropertyDtoReq property) {
+    public void addProperty(@AuthenticationPrincipal AwesomeUserDetails user, @Valid @RequestBody PropertyDtoReq property) {
         propertyService.addProperty(user, property);
     }
 

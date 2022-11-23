@@ -2,7 +2,7 @@ spring:
   application:
     name: "PROPERTY-MANAGEMENT-PORTAL-BACKEND"
   datasource:
-    password: password
+    password: 1
     url: jdbc:postgresql://localhost:5432/waa-final
     username: postgres
   jpa:
