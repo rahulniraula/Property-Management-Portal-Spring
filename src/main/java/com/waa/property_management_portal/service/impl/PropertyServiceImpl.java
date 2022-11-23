@@ -1,6 +1,8 @@
 package com.waa.property_management_portal.service.impl;
 
+import com.waa.property_management_portal.entity.Address;
 import com.waa.property_management_portal.entity.Property;
+import com.waa.property_management_portal.entity.PropertyDetails;
 import com.waa.property_management_portal.entity.User;
 import com.waa.property_management_portal.entity.dto.request.PropertyDtoReq;
 import com.waa.property_management_portal.entity.dto.response.PropertyDtoRes;
@@ -62,6 +64,8 @@ public class PropertyServiceImpl implements PropertyService {
         User u = userRepo.findByEmail(user.getUsername());
         Property property = modelMapper.map(p, Property.class);
         property.setOwner(u);
+        property.setAddress(modelMapper.map(p.getAddress(), Address.class));
+        property.setDetails(modelMapper.map(p.getDetails(), PropertyDetails.class));
         propertyRepo.save(property);
     }
 
