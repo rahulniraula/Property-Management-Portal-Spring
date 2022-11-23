@@ -3,6 +3,7 @@ package com.waa.property_management_portal.controller;
 import com.waa.property_management_portal.entity.dto.request.PropertyDtoReq;
 import com.waa.property_management_portal.entity.dto.response.PropertyDtoRes;
 import com.waa.property_management_portal.enums.PropertyStatus;
+import com.waa.property_management_portal.model.PropertySearchCriteria;
 import com.waa.property_management_portal.service.PropertyService;
 import com.waa.property_management_portal.service.impl.AwesomeUserDetails;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -24,7 +25,10 @@ public class PropertyController {
     }
 
     @GetMapping("/")
-    public List<PropertyDtoRes> getProperties() {
+    public List<PropertyDtoRes> getProperties(@RequestBody(required = false) PropertySearchCriteria searchCriteria) {
+        if (searchCriteria != null) {
+            return propertyService.findAllWithFilters(searchCriteria);
+        }
         return propertyService.findAll();
     }
 
