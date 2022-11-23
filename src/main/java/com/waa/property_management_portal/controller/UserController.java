@@ -1,8 +1,10 @@
 package com.waa.property_management_portal.controller;
 
+import com.waa.property_management_portal.entity.Favorite;
+import com.waa.property_management_portal.entity.Property;
 import com.waa.property_management_portal.entity.dto.request.UserDtoRequest;
+import com.waa.property_management_portal.entity.dto.response.UserDtoResponse;
 import com.waa.property_management_portal.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,18 +14,21 @@ import java.util.List;
 @RequestMapping("/api/v1/users")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserController {
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/")
     @ResponseStatus(HttpStatus.OK)
-    public List<UserDtoRequest> getAllUsers(){
+    public List<UserDtoResponse> getAllUsers(){
         return userService.findAll();
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public UserDtoRequest getUserById(@PathVariable("id") Long id){
+    public UserDtoResponse getUserById(@PathVariable("id") Long id){
         return userService.findById(id);
     }
 
@@ -42,4 +47,13 @@ public class UserController {
         userService.deleteById(userId);
     }
 
+    @GetMapping("/{id}/properties")
+    public List<Property> getProperties(@PathVariable long id) {
+        return userService.findProperties(id);
+    }
+
+    @GetMapping("/{id}/favorites")
+    public List<Favorite> getFavorites(@PathVariable long id) {
+        return userService.findFavorites(id);
+    }
 }

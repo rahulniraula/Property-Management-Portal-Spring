@@ -1,14 +1,26 @@
 package com.waa.property_management_portal.controller;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.waa.property_management_portal.entity.Property;
+import com.waa.property_management_portal.entity.dto.request.PropertyDto;
+import com.waa.property_management_portal.service.PropertyService;
+import com.waa.property_management_portal.service.UserService;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/users")
+@RequestMapping("/api/v1/properties")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class PropertyController {
-    //TODO:
+
+    private PropertyService propertyService;
+
+    public PropertyController(PropertyService propertyService) {
+        this.propertyService = propertyService;
+    }
+
+    @GetMapping("/")
+    public List<PropertyDto> getProperties() {
+        return propertyService.findAll();
+    }
 }
