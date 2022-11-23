@@ -44,5 +44,8 @@ public class User {
     }
 
     @OneToMany(mappedBy = "user")
-    List<Favorite> favorites;
+    private List<Favorite> favorites;
+
+    @OneToMany(mappedBy = "user")
+    private List<Offer> offers;
 }
