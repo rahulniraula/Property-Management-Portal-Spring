@@ -13,7 +13,7 @@ import java.util.Date;
 public class PropertyDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
     private int noOfRooms;
     private String homeType;
     @Temporal(TemporalType.DATE)

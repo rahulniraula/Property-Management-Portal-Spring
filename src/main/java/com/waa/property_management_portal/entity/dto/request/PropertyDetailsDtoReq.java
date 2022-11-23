@@ -4,6 +4,8 @@ import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
 public class PropertyDetailsDtoReq {
+    private long id;
+
     @NotEmpty(message = "Please provide number of rooms.")
     private int noOfRooms;
 
