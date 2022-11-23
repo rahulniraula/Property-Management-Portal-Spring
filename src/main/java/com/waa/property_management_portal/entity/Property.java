@@ -1,5 +1,6 @@
 package com.waa.property_management_portal.entity;
 
+import com.waa.property_management_portal.enums.PropertyStatus;
 import com.waa.property_management_portal.enums.PropertyType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,6 +21,7 @@ public class Property {
     private double price;
     private double area;
     private PropertyType propertyType;
+    private PropertyStatus propertyStatus;
 
     @OneToOne
     private Address address;
