@@ -18,8 +18,12 @@ public class PropertyDtoReq {
     @NotEmpty(message = "Please provide area in sqft unit.")
     private double area;
 
+    @NotEmpty(message = "Please select a property type.")
     private PropertyType propertyType;
+
+    @NotEmpty(message = "Please provide address for the property.")
     private Address address;
 
+    @NotEmpty(message = "Please provide property details.")
     private PropertyDetails details;
 }
