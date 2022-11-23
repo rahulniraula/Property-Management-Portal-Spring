@@ -3,6 +3,7 @@ package com.waa.property_management_portal.service.impl;
 import com.waa.property_management_portal.entity.Property;
 import com.waa.property_management_portal.entity.User;
 import com.waa.property_management_portal.entity.dto.request.UserDtoRequest;
+import com.waa.property_management_portal.entity.dto.response.UserDtoResponse;
 import com.waa.property_management_portal.repository.RoleRepository;
 import com.waa.property_management_portal.repository.UserRepo;
 import com.waa.property_management_portal.service.UserService;
@@ -27,14 +28,14 @@ public class UserServiceImpl implements UserService {
     private BCryptPasswordEncoder passwordEncoder;
 
     @Override
-    public List<UserDtoRequest> findAll() {
+    public List<UserDtoResponse> findAll() {
         return userRepo.findAll().stream()
-                .map(p -> modelMapper.map(p, UserDtoRequest.class))
+                .map(p -> modelMapper.map(p, UserDtoResponse.class))
                 .collect(Collectors.toList());
     }
 
-    public UserDtoRequest findById(long id) {
-        return modelMapper.map(userRepo.findById(id), UserDtoRequest.class);
+    public UserDtoResponse findById(long id) {
+        return modelMapper.map(userRepo.findById(id), UserDtoResponse.class);
     }
 
     @Override

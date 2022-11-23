@@ -3,12 +3,14 @@ package com.waa.property_management_portal.service;
 import com.waa.property_management_portal.entity.Property;
 import com.waa.property_management_portal.entity.User;
 import com.waa.property_management_portal.entity.dto.request.UserDtoRequest;
+import com.waa.property_management_portal.entity.dto.response.UserDtoResponse;
+
 import java.util.List;
 
 public interface UserService {
-    List<UserDtoRequest> findAll();
+    List<UserDtoResponse> findAll();
 
-    UserDtoRequest findById(long id);
+    UserDtoResponse findById(long id);
 
     void deleteById(long id);
 

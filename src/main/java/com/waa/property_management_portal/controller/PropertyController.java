@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/users/{userId}/properties")
+@RequestMapping("/api/v1/properties")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class PropertyController {
 
