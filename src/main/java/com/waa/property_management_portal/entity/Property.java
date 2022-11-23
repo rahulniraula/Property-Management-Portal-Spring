@@ -15,8 +15,8 @@ public class Property {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private double price;
     private String title;
+    private double price;
     private double area;
     private PropertyType propertyType;
 
