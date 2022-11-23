@@ -2,7 +2,7 @@ spring:
   application:
     name: "PROPERTY-MANAGEMENT-PORTAL-BACKEND"
   datasource:
-    password: password
+    password: 1
     url: jdbc:postgresql://localhost:5432/waa-final
     username: postgres
   jpa:
@@ -18,5 +18,16 @@ spring:
   sql:
     init:
       mode: always
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: sujan.a13@gmail.com
+    password: ylilkelujxwvfvht
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 server:
   port: 8080

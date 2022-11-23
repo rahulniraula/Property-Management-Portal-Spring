@@ -1,5 +1,6 @@
 package com.waa.property_management_portal.service.impl;
 
+import com.waa.property_management_portal.entity.EmailDetails;
 import com.waa.property_management_portal.entity.User;
 import com.waa.property_management_portal.entity.dto.request.LoginRequest;
 import com.waa.property_management_portal.entity.dto.request.RefreshTokenRequest;
@@ -8,6 +9,7 @@ import com.waa.property_management_portal.entity.dto.response.LoginResponse;
 import com.waa.property_management_portal.entity.dto.response.UserDtoResponse;
 import com.waa.property_management_portal.repository.RoleRepository;
 import com.waa.property_management_portal.service.AuthService;
+import com.waa.property_management_portal.service.EmailService;
 import com.waa.property_management_portal.service.UserService;
 import com.waa.property_management_portal.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
@@ -37,6 +39,9 @@ public class AuthServiceImpl implements AuthService {
 
     @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    private EmailService emailService;
     private final JwtUtil jwtUtil;
 
     @Override
@@ -71,6 +76,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public UserDtoResponse registerUser(UserDtoRequest u) {
         User user = userService.save(u);
+        emailService.sendMail(new EmailDetails(user.getEmail(), "Testing Email Sending","Hi, This is Testing"));
         return modelMapper.map(user, UserDtoResponse.class);
     }
 }
