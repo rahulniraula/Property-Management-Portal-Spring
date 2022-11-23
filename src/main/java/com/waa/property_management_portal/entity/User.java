@@ -24,6 +24,8 @@ public class User {
     private String lastname;
     private String phoneNumber;
     private String password;
+
+    @Enumerated(EnumType.STRING)
     private UserStatus status;
 
     @CreatedDate

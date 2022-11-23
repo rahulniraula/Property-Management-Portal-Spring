@@ -23,6 +23,7 @@ public class Offer {
     @CreatedDate
     private LocalDateTime offerDate;
 
+    @Enumerated(EnumType.STRING)
     private OfferStatus status;
 
     @ManyToOne
