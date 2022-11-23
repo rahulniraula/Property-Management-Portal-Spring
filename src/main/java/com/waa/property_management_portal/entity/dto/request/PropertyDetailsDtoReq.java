@@ -1,12 +1,20 @@
 package com.waa.property_management_portal.entity.dto.request;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class PropertyDetailsDtoReq {
     private long id;
 
-    @NotEmpty(message = "Please provide number of rooms.")
+    @DecimalMin(message = "Please provide number of rooms.", value = "1")
     private int noOfRooms;
 
     @NotEmpty(message = "Please provide type of the home.")

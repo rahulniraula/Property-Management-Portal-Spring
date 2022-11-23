@@ -15,7 +15,6 @@ public class PropertyDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private int noOfRooms;
-    private String homeType;
     @Temporal(TemporalType.DATE)
     private Date buildDate;
     private String heatingSystem;
@@ -23,8 +22,7 @@ public class PropertyDetails {
     private String parking;
     private String description;
     private long noOfViews;
-
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Property property;
 
 }
