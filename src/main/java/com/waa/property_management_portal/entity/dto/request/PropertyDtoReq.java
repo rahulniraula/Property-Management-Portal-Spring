@@ -1,7 +1,5 @@
 package com.waa.property_management_portal.entity.dto.request;
 
-import com.waa.property_management_portal.entity.Address;
-import com.waa.property_management_portal.entity.PropertyDetails;
 import com.waa.property_management_portal.enums.PropertyType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
