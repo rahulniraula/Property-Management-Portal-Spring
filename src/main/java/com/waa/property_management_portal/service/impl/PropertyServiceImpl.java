@@ -4,6 +4,7 @@ import com.waa.property_management_portal.entity.Property;
 import com.waa.property_management_portal.entity.User;
 import com.waa.property_management_portal.entity.dto.request.PropertyDtoReq;
 import com.waa.property_management_portal.entity.dto.response.PropertyDtoRes;
+import com.waa.property_management_portal.enums.PropertyStatus;
 import com.waa.property_management_portal.repository.PropertyRepo;
 import com.waa.property_management_portal.repository.UserRepo;
 import com.waa.property_management_portal.service.PropertyService;
@@ -61,6 +62,13 @@ public class PropertyServiceImpl implements PropertyService {
         User u = userRepo.findByEmail(user.getUsername());
         Property property = modelMapper.map(p, Property.class);
         property.setOwner(u);
+        propertyRepo.save(property);
+    }
+
+    @Override
+    public void updateStatus(long id, PropertyStatus status) {
+        Property property = propertyRepo.findById(id);
+        property.setPropertyStatus(status);
         propertyRepo.save(property);
     }
 }
