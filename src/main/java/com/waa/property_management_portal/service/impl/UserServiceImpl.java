@@ -5,6 +5,8 @@ import com.waa.property_management_portal.entity.Property;
 import com.waa.property_management_portal.entity.User;
 import com.waa.property_management_portal.entity.dto.request.UserDtoRequest;
 import com.waa.property_management_portal.entity.dto.response.UserDtoResponse;
+import com.waa.property_management_portal.enums.UserRole;
+import com.waa.property_management_portal.enums.UserStatus;
 import com.waa.property_management_portal.repository.RoleRepository;
 import com.waa.property_management_portal.repository.UserRepo;
 import com.waa.property_management_portal.service.UserService;
@@ -47,9 +49,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User save(UserDtoRequest u) {
+        String role = u.getRole().name();
+        if (role.equals(UserRole.ADMIN)) {
+            throw new RuntimeException("You can not register as an admin.");
+        }
         User user = modelMapper.map(u, User.class);
         user.setPassword(passwordEncoder.encode(u.getPassword()));
-        user.addRole(roleRepository.findByRole(u.getRole().name()));
+        user.addRole(roleRepository.findByRole(role));
+        UserStatus status = role.equals(UserRole.OWNER) ? UserStatus.INACTIVE : UserStatus.ACTIVE;
+        user.setStatus(status);
         return userRepo.save(user);
     }
 
