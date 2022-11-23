@@ -1,5 +1,5 @@
 package com.waa.property_management_portal.enums;
 
 public enum PropertyType {
-    DUPLEX
+    SINGLE, CONDO, DUPLEX
 }
