@@ -1,5 +1,6 @@
 package com.waa.property_management_portal.controller;
 
+import com.waa.property_management_portal.entity.Favorite;
 import com.waa.property_management_portal.entity.Property;
 import com.waa.property_management_portal.entity.dto.request.UserDtoRequest;
 import com.waa.property_management_portal.entity.dto.response.UserDtoResponse;
@@ -49,5 +50,10 @@ public class UserController {
     @GetMapping("/{id}/properties")
     public List<Property> getProperties(@PathVariable long id) {
         return userService.findProperties(id);
+    }
+
+    @GetMapping("/{id}/favorites")
+    public List<Favorite> getFavorites(@PathVariable long id) {
+        return userService.findFavorites(id);
     }
 }

@@ -43,6 +43,6 @@ public class User {
         this.roles.add(role);
     }
 
-    @OneToMany
-    List<Favorite> favourites;
+    @OneToMany(mappedBy = "user")
+    List<Favorite> favorites;
 }

@@ -1,5 +1,6 @@
 package com.waa.property_management_portal.service.impl;
 
+import com.waa.property_management_portal.entity.Favorite;
 import com.waa.property_management_portal.entity.Property;
 import com.waa.property_management_portal.entity.User;
 import com.waa.property_management_portal.entity.dto.request.UserDtoRequest;
@@ -67,5 +68,11 @@ public class UserServiceImpl implements UserService {
     public List<Property> findProperties(long id) {
         User user = userRepo.findById(id);
         return user.getProperties();
+    }
+
+    @Override
+    public List<Favorite> findFavorites(long id) {
+        User user = userRepo.findById(id);
+        return user.getFavorites();
     }
 }
