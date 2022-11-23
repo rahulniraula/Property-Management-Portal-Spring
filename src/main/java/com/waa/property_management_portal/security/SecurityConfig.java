@@ -41,6 +41,7 @@ public class SecurityConfig {
                 .cors().and().csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/api/v1/authenticate/**").permitAll()
+                .antMatchers("/api/v1/configs/**").permitAll()
                 //TODO: Implement Access
 //                .antMatchers("/api/v1/users/**").access("hasAuthority('CLIENT') or hasAuthority('ADMIN')")
 //                .antMatchers("/api/v1/admin/**").hasAuthority("ADMIN")
