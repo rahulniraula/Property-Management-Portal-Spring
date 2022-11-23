@@ -1,7 +1,10 @@
 package com.waa.property_management_portal.controller;
 
-import com.waa.property_management_portal.entity.dto.request.PropertyDto;
+import com.waa.property_management_portal.entity.dto.request.PropertyDtoReq;
+import com.waa.property_management_portal.entity.dto.response.PropertyDtoRes;
 import com.waa.property_management_portal.service.PropertyService;
+import com.waa.property_management_portal.service.impl.AwesomeUserDetails;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +21,12 @@ public class PropertyController {
     }
 
     @GetMapping("/")
-    public List<PropertyDto> getProperties() {
+    public List<PropertyDtoRes> getProperties() {
         return propertyService.findAll();
+    }
+
+    @PostMapping("/")
+    public void addProperty(@AuthenticationPrincipal AwesomeUserDetails user, @RequestBody PropertyDtoReq property) {
+        propertyService.addProperty(user, property);
     }
 }
