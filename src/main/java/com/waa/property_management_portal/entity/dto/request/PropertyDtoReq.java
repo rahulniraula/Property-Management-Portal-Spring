@@ -21,9 +21,7 @@ public class PropertyDtoReq {
     @NotEmpty(message = "Please select a property type.")
     private PropertyType propertyType;
 
-    @NotEmpty(message = "Please provide address for the property.")
-    private Address address;
+    private AddressDto address;
 
-    @NotEmpty(message = "Please provide property details.")
-    private PropertyDetails details;
+    private PropertyDetailsDtoReq details;
 }
