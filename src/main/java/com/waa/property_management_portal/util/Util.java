@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Util {
-    public  static List<String> getLoggedUserRoles(){
+    public  static List<String> getLoggedUserRoles() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if(authentication!=null){
             Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
@@ -18,11 +18,19 @@ public class Util {
         }
         return null;
     }
-    public static boolean loggedInUserHasRole(String role){
+    public static boolean loggedInUserHasRole(String role) {
         List<String> loggedUserRoles = Util.getLoggedUserRoles();
-        if(loggedUserRoles!=null){
+        if (loggedUserRoles!=null){
             return loggedUserRoles.contains(role);
         }
         return false;
+    }
+
+    public static String getLoggedInUserName() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null) {
+            return authentication.getName();
+        }
+        return null;
     }
 }

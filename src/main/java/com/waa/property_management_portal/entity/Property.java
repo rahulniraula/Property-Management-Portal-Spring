@@ -48,8 +48,11 @@ public class Property {
     private List<Offer> offers;
     @Transient
     private boolean offered;
-    private boolean getOffered(){
-        if(this.getOffers().stream().anyMatch(offer -> offer.getProperty().equals(this))){
+    private boolean getOffered() {
+        String username = Util.getLoggedInUserName();
+        if (this.getOffers()
+                .stream()
+                .anyMatch(offer -> offer.getUser().getEmail().equals(username))){
             return true;
         }
         return false;

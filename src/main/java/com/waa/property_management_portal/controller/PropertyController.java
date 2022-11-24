@@ -7,7 +7,6 @@ import com.waa.property_management_portal.model.PropertySearchCriteria;
 import com.waa.property_management_portal.service.PropertyService;
 import com.waa.property_management_portal.service.impl.AwesomeUserDetails;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
