@@ -24,4 +24,5 @@ public class UserDtoResponse {
     @NotEmpty
     private String phoneNumber;
     private List<Role> roles;
+    private List<String> actions;
 }

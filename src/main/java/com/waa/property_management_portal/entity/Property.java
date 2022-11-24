@@ -8,8 +8,11 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Entity
@@ -39,4 +42,14 @@ public class Property {
 
     @OneToMany(mappedBy = "property")
     private List<Image> images;
+
+    @Transient
+    private List<String> actions;
+    public List<String> getActions(){
+        List<String> actions=new ArrayList<>();
+        Object[] objects = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toArray();
+        System.out.println(Arrays.toString(objects));
+        actions.add("ACT");
+        return actions;
+    }
 }

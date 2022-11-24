@@ -1,11 +1,11 @@
 -- USERS
 
-INSERT INTO Users (id, email, firstname, lastname, password)
-VALUES (111, 'admin@miu.edu', 'Admin', 'Admin', '$2a$12$IKEQb00u5QpZMx4v5zMweu.3wrq0pS7XLCHO4yHZ.BW/yvWu1feo2'); --123
-INSERT INTO Users (id, email, firstname, lastname, password)
-VALUES (112, 'testuser01@miu.edu', 'Test', 'User', '$2a$12$IKEQb00u5QpZMx4v5zMweu.3wrq0pS7XLCHO4yHZ.BW/yvWu1feo2'); --123
-INSERT INTO Users (id, email, firstname, lastname, password)
-VALUES (113, 'mohammad.fuad@miu.edu', 'Mohammad', 'Fuad', '$2a$12$IKEQb00u5QpZMx4v5zMweu.3wrq0pS7XLCHO4yHZ.BW/yvWu1feo2'); --123
+INSERT INTO Users (id, email, firstname, lastname, password, status)
+VALUES (111, 'admin@miu.edu', 'Admin', 'Admin', '$2a$12$IKEQb00u5QpZMx4v5zMweu.3wrq0pS7XLCHO4yHZ.BW/yvWu1feo2','ACTIVE'); --123
+INSERT INTO Users (id, email, firstname, lastname, password,status)
+VALUES (112, 'testuser01@miu.edu', 'Test', 'User', '$2a$12$IKEQb00u5QpZMx4v5zMweu.3wrq0pS7XLCHO4yHZ.BW/yvWu1feo2','ACTIVE'); --123
+INSERT INTO Users (id, email, firstname, lastname, password,status)
+VALUES (113, 'mohammad.fuad@miu.edu', 'Mohammad', 'Fuad', '$2a$12$IKEQb00u5QpZMx4v5zMweu.3wrq0pS7XLCHO4yHZ.BW/yvWu1feo2','ACTIVE'); --123
 
 -- Role
 INSERT INTO role (id, role)
