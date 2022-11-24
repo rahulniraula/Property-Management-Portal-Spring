@@ -19,4 +19,5 @@ public class PropertyDtoRes {
     private PropertyType propertyType;
     private List<String> actions;
     private PropertyDetailsDtoResponse details;
+    private boolean offered;
 }

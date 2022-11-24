@@ -47,6 +47,14 @@ public class Property {
     @OneToMany(mappedBy = "property")
     private List<Offer> offers;
     @Transient
+    private boolean offered;
+    private boolean getOffered(){
+        if(this.getOffers().stream().anyMatch(offer -> offer.getProperty().equals(this))){
+            return true;
+        }
+        return false;
+    }
+    @Transient
     private List<String> actions;
     public List<String> getActions(){
         List<String> actions=new ArrayList<>();
