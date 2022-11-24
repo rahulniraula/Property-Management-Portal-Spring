@@ -53,6 +53,9 @@ public class FavoriteServiceImpl implements FavoriteService {
     public void addPropertyToFavorite(AwesomeUserDetails userDetails, long id, long propId) {
         User user = userRepo.findByEmail(userDetails.getUsername());
         Favorite favorite = favoriteRepo.findById(id);
+        if (favorite.getProperties().stream().anyMatch(p -> p.getId() == propId)) {
+            throw new RuntimeException("This property is already added as favorite in this list");
+        }
         Property property = propertyRepo.findById(propId);
         favorite.setUser(user);
         favorite.getProperties().add(property);
