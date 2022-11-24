@@ -112,4 +112,11 @@ public class UserServiceImpl implements UserService {
         favorite.getProperties().add(property);
         favRepo.save(favorite);
     }
+
+    @Override
+    public void updateStatus(long id, UserStatus status) {
+        User user = userRepo.findById(id);
+        user.setStatus(status);
+        userRepo.save(user);
+    }
 }

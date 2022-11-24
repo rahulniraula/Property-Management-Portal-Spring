@@ -6,6 +6,8 @@ import com.waa.property_management_portal.entity.dto.request.FavoriteDto;
 import com.waa.property_management_portal.entity.dto.request.UserDtoRequest;
 import com.waa.property_management_portal.entity.dto.response.PropertyDtoRes;
 import com.waa.property_management_portal.entity.dto.response.UserDtoResponse;
+import com.waa.property_management_portal.enums.PropertyStatus;
+import com.waa.property_management_portal.enums.UserStatus;
 import com.waa.property_management_portal.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -69,5 +71,10 @@ public class UserController {
                                       @PathVariable long favId,
                                       @PathVariable long propId) {
         userService.addPropertyToFavorite(id, favId, propId);
+    }
+
+    @PutMapping("/{id}/{status}")
+    public void updateStatus(@PathVariable long id, @PathVariable UserStatus status) {
+        userService.updateStatus(id, status);
     }
 }

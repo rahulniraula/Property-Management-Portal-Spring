@@ -6,6 +6,7 @@ import com.waa.property_management_portal.entity.dto.request.FavoriteDto;
 import com.waa.property_management_portal.entity.dto.request.UserDtoRequest;
 import com.waa.property_management_portal.entity.dto.response.PropertyDtoRes;
 import com.waa.property_management_portal.entity.dto.response.UserDtoResponse;
+import com.waa.property_management_portal.enums.UserStatus;
 
 import java.util.List;
 
@@ -27,4 +28,6 @@ public interface UserService {
     void addFavorite(long id, FavoriteDto fav);
 
     void addPropertyToFavorite(long id, long favId, long propId);
+
+    void updateStatus(long id, UserStatus status);
 }
