@@ -17,7 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/properties")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-//@Transactional
+@Transactional
 public class PropertyController {
 
     private PropertyService propertyService;

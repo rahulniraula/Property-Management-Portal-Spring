@@ -1,6 +1,7 @@
 package com.waa.property_management_portal.service.impl;
 
 import com.waa.property_management_portal.entity.Offer;
+import com.waa.property_management_portal.entity.Property;
 import com.waa.property_management_portal.entity.dto.request.OfferDto;
 import com.waa.property_management_portal.enums.OfferStatus;
 import com.waa.property_management_portal.repository.OfferRepo;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -44,5 +46,12 @@ public class OfferServiceImpl implements OfferService {
     @Override
     public List<OfferDto> getAll() {
         return offerRepo.findAll().stream().map(offer -> modelMapper.map(offer,OfferDto.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public void updateStatus(long id, OfferStatus status) {
+        Offer offer = offerRepo.findById(id);
+        offer.setStatus(status);
+        offerRepo.save(offer);
     }
 }
