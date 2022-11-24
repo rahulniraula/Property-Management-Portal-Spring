@@ -44,7 +44,8 @@ public class Property {
 
     @OneToMany(mappedBy = "property")
     private List<Image> images;
-
+    @OneToMany(mappedBy = "property")
+    private List<Offer> offers;
     @Transient
     private List<String> actions;
     public List<String> getActions(){
