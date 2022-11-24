@@ -4,6 +4,7 @@ import com.waa.property_management_portal.entity.Address;
 import com.waa.property_management_portal.entity.Property;
 import com.waa.property_management_portal.entity.PropertyDetails;
 import com.waa.property_management_portal.entity.User;
+import com.waa.property_management_portal.entity.dto.request.OfferDto;
 import com.waa.property_management_portal.entity.dto.request.PropertyDtoReq;
 import com.waa.property_management_portal.entity.dto.response.PropertyDtoRes;
 import com.waa.property_management_portal.enums.PropertyStatus;
@@ -115,5 +116,9 @@ public class PropertyServiceImpl implements PropertyService {
         Property property = propertyRepo.findById(id);
         property.setPropertyStatus(status);
         propertyRepo.save(property);
+    }
+    public List<OfferDto> getOffers(long productId){
+        Property property = propertyRepo.findById(productId);
+        return property.getOffers().stream().map(o->modelMapper.map(o, OfferDto.class)).collect(Collectors.toList());
     }
 }

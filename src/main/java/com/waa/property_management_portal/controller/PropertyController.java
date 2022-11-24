@@ -1,5 +1,6 @@
 package com.waa.property_management_portal.controller;
 
+import com.waa.property_management_portal.entity.dto.request.OfferDto;
 import com.waa.property_management_portal.entity.dto.request.PropertyDtoReq;
 import com.waa.property_management_portal.entity.dto.response.PropertyDtoRes;
 import com.waa.property_management_portal.enums.PropertyStatus;
@@ -41,5 +42,9 @@ public class PropertyController {
     @PutMapping("/{id}/{status}")
     public void updateStatus(@PathVariable long id, @PathVariable PropertyStatus status) {
         propertyService.updateStatus(id, status);
+    }
+    @GetMapping("/{id}/offers")
+    public List<OfferDto> getOffers(@PathVariable Long id){
+        return propertyService.getOffers(id);
     }
 }

@@ -1,6 +1,7 @@
 package com.waa.property_management_portal.service;
 
 import com.waa.property_management_portal.entity.Property;
+import com.waa.property_management_portal.entity.dto.request.OfferDto;
 import com.waa.property_management_portal.entity.dto.request.PropertyDtoReq;
 import com.waa.property_management_portal.entity.dto.response.PropertyDtoRes;
 import com.waa.property_management_portal.enums.PropertyStatus;
@@ -25,4 +26,5 @@ public interface PropertyService {
     void addProperty(AwesomeUserDetails user, PropertyDtoReq property);
 
     void updateStatus(long id, PropertyStatus status);
+    public List<OfferDto> getOffers(long productId);
 }
