@@ -2,8 +2,12 @@ package com.waa.property_management_portal.controller;
 
 import com.waa.property_management_portal.entity.Favorite;
 import com.waa.property_management_portal.entity.Property;
+import com.waa.property_management_portal.entity.dto.request.FavoriteDto;
 import com.waa.property_management_portal.entity.dto.request.UserDtoRequest;
+import com.waa.property_management_portal.entity.dto.response.PropertyDtoRes;
 import com.waa.property_management_portal.entity.dto.response.UserDtoResponse;
+import com.waa.property_management_portal.enums.PropertyStatus;
+import com.waa.property_management_portal.enums.UserStatus;
 import com.waa.property_management_portal.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -48,12 +52,29 @@ public class UserController {
     }
 
     @GetMapping("/{id}/properties")
-    public List<Property> getProperties(@PathVariable long id) {
+    public List<PropertyDtoRes> getProperties(@PathVariable long id) {
         return userService.findProperties(id);
     }
 
     @GetMapping("/{id}/favorites")
     public List<Favorite> getFavorites(@PathVariable long id) {
         return userService.findFavorites(id);
+    }
+
+    @PostMapping("/{id}/favorites")
+    public void addFavorite(@PathVariable long id, @RequestBody FavoriteDto fav) {
+        userService.addFavorite(id, fav);
+    }
+
+    @PostMapping("/{id}/favorites/{favId}/{propId}")
+    public void addPropertyToFavorite(@PathVariable long id,
+                                      @PathVariable long favId,
+                                      @PathVariable long propId) {
+        userService.addPropertyToFavorite(id, favId, propId);
+    }
+
+    @PutMapping("/{id}/{status}")
+    public void updateStatus(@PathVariable long id, @PathVariable UserStatus status) {
+        userService.updateStatus(id, status);
     }
 }

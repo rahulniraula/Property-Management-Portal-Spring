@@ -14,7 +14,7 @@ import java.util.List;
 public class Favorite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
     private String name;
 
     @ManyToOne
