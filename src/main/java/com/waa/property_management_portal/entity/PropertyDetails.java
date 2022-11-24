@@ -22,7 +22,9 @@ public class PropertyDetails {
     private String parking;
     private String description;
     private long noOfViews;
-    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+
+    @OneToOne(mappedBy = "details")
     private Property property;
+
 
 }

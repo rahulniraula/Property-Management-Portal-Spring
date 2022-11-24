@@ -34,7 +34,7 @@ public class Property {
     @ManyToOne
     private User owner;
 
-    @OneToOne(cascade = CascadeType.ALL,mappedBy = "property",fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL)
     private PropertyDetails details;
 
     @OneToMany(mappedBy = "property")

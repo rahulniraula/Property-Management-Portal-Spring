@@ -13,10 +13,12 @@ import com.waa.property_management_portal.service.PropertyService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class PropertyServiceImpl implements PropertyService {
 
     private final PropertyRepo propertyRepo;
@@ -63,9 +65,10 @@ public class PropertyServiceImpl implements PropertyService {
     public void addProperty(AwesomeUserDetails user, PropertyDtoReq p) {
         User u = userRepo.findByEmail(user.getUsername());
         Property property = modelMapper.map(p, Property.class);
-        property.setOwner(u);
 //        property.setAddress(modelMapper.map(p.getAddress(), Address.class));
-        property.setDetails(modelMapper.map(p, PropertyDetails.class));
+        PropertyDetails propertyDetails = modelMapper.map(p, PropertyDetails.class);
+        propertyDetails.setProperty(null);
+        property.setDetails(propertyDetails);
         propertyRepo.save(property);
     }
 
