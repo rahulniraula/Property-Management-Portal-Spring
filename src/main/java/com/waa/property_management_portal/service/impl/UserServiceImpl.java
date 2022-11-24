@@ -3,33 +3,40 @@ package com.waa.property_management_portal.service.impl;
 import com.waa.property_management_portal.entity.Favorite;
 import com.waa.property_management_portal.entity.Property;
 import com.waa.property_management_portal.entity.User;
+import com.waa.property_management_portal.entity.dto.request.FavoriteDto;
 import com.waa.property_management_portal.entity.dto.request.UserDtoRequest;
+import com.waa.property_management_portal.entity.dto.response.PropertyDtoRes;
 import com.waa.property_management_portal.entity.dto.response.UserDtoResponse;
 import com.waa.property_management_portal.enums.UserRole;
 import com.waa.property_management_portal.enums.UserStatus;
+import com.waa.property_management_portal.repository.FavoriteRepo;
+import com.waa.property_management_portal.repository.PropertyRepo;
 import com.waa.property_management_portal.repository.RoleRepository;
 import com.waa.property_management_portal.repository.UserRepo;
 import com.waa.property_management_portal.service.UserService;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
-    private final UserRepo userRepo;
-    private final ModelMapper modelMapper;
-    private final RoleRepository roleRepository;
-    private final BCryptPasswordEncoder passwordEncoder;
-
-    public UserServiceImpl(UserRepo userRepo, ModelMapper modelMapper, RoleRepository roleRepository, BCryptPasswordEncoder passwordEncoder) {
-        this.userRepo = userRepo;
-        this.modelMapper = modelMapper;
-        this.roleRepository = roleRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
+    @Autowired
+    private UserRepo userRepo;
+    @Autowired
+    private FavoriteRepo favRepo;
+    @Autowired
+    private PropertyRepo propertyRepo;
+    @Autowired
+    private ModelMapper modelMapper;
+    @Autowired
+    private RoleRepository roleRepository;
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public List<UserDtoResponse> findAll() {
@@ -74,14 +81,35 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<Property> findProperties(long id) {
+    public List<PropertyDtoRes> findProperties(long id) {
         User user = userRepo.findById(id);
-        return user.getProperties();
+        List<Property> properties = user.getProperties();
+        return properties.stream()
+                .map(p -> modelMapper.map(p, PropertyDtoRes.class))
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<Favorite> findFavorites(long id) {
         User user = userRepo.findById(id);
         return user.getFavorites();
+    }
+
+    @Override
+    public void addFavorite(long id, FavoriteDto fav) {
+        User user = userRepo.findById(id);
+        Favorite favorite = modelMapper.map(fav, Favorite.class);
+        favorite.setUser(user);
+        favRepo.save(favorite);
+    }
+
+    @Override
+    public void addPropertyToFavorite(long id, long favId, long propId) {
+        User user = userRepo.findById(id);
+        Property property = propertyRepo.findById(propId);
+        Favorite favorite = favRepo.findById(favId);
+        favorite.setUser(user);
+        favorite.getProperties().add(property);
+        favRepo.save(favorite);
     }
 }
