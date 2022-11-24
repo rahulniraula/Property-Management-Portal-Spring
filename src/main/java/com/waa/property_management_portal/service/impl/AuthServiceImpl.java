@@ -7,6 +7,7 @@ import com.waa.property_management_portal.entity.dto.request.RefreshTokenRequest
 import com.waa.property_management_portal.entity.dto.request.UserDtoRequest;
 import com.waa.property_management_portal.entity.dto.response.LoginResponse;
 import com.waa.property_management_portal.entity.dto.response.UserDtoResponse;
+import com.waa.property_management_portal.enums.UserRole;
 import com.waa.property_management_portal.repository.RoleRepository;
 import com.waa.property_management_portal.service.AuthService;
 import com.waa.property_management_portal.service.EmailService;

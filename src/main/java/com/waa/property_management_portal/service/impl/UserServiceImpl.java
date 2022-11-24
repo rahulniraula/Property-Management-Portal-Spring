@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
         User user = modelMapper.map(u, User.class);
         user.setPassword(passwordEncoder.encode(u.getPassword()));
         user.addRole(roleRepository.findByRole(role));
-        UserStatus status = role.equals(UserRole.OWNER) ? UserStatus.INACTIVE : UserStatus.ACTIVE;
+        UserStatus status = role.equals(UserRole.OWNER.name()) ? UserStatus.INACTIVE : UserStatus.ACTIVE;
         user.setStatus(status);
         return userRepo.save(user);
     }

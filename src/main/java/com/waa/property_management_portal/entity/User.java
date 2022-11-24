@@ -66,8 +66,8 @@ public class User {
             if(this.getStatus().equals(UserStatus.ACTIVE)){
                 actions.add(UserStatus.INACTIVE.name());
                 actions.add("Reset Password");
-                actions.add("Edit User");
-                actions.add("Delete User");
+//                actions.add("Edit User");
+//                actions.add("Delete User");
             }else{
                 actions.add(UserStatus.ACTIVE.name());
             }
