@@ -77,6 +77,10 @@ public class PropertyServiceImpl implements PropertyService {
 
     @Override
     public void deleteById(long id) {
+        Property property = propertyRepo.findById(id);
+        if (property.getPropertyStatus().equals(PropertyStatus.PENDING)) {
+            throw new RuntimeException("Sorry, you cannot remove property which is in pending status.");
+        }
         propertyRepo.deleteById(id);
     }
 
