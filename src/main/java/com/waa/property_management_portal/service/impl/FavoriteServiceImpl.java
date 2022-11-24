@@ -38,8 +38,13 @@ public class FavoriteServiceImpl implements FavoriteService {
 
     @Override
     public void addFavorite(AwesomeUserDetails userDetails, FavoriteDto fav) {
+        Favorite favWithSameName = favoriteRepo.findByName(fav.getName());
+        String username = userDetails.getUsername();
+        if (favWithSameName != null && favWithSameName.getUser().getEmail().equals(username)) {
+            throw new RuntimeException("Sorry, you can not create favorite list with existing name");
+        }
+        User user = userRepo.findByEmail(username);
         Favorite favorite = modelMapper.map(fav, Favorite.class);
-        User user = userRepo.findByEmail(userDetails.getUsername());
         favorite.setUser(user);
         favoriteRepo.save(favorite);
     }
