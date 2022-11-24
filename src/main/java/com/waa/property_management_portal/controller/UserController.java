@@ -6,6 +6,7 @@ import com.waa.property_management_portal.entity.dto.response.UserDtoResponse;
 import com.waa.property_management_portal.enums.UserStatus;
 import com.waa.property_management_portal.service.UserService;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class UserController {
 
     @GetMapping("/")
     @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasRole('ADMIN')")
     public List<UserDtoResponse> getAllUsers(){
         return userService.findAll();
     }
