@@ -19,7 +19,7 @@ public class FavoriteController {
     private FavoriteService favoriteService;
 
     @GetMapping("/")
-    public List<Favorite> getFavorites(@AuthenticationPrincipal AwesomeUserDetails user) {
+    public List<FavoriteDto> getFavorites(@AuthenticationPrincipal AwesomeUserDetails user) {
         return favoriteService.findFavorites(user);
     }
 

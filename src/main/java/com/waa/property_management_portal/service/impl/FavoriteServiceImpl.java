@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class FavoriteServiceImpl implements FavoriteService {
@@ -30,9 +31,9 @@ public class FavoriteServiceImpl implements FavoriteService {
     private ModelMapper modelMapper;
 
     @Override
-    public List<Favorite> findFavorites(AwesomeUserDetails userDetails) {
+    public List<FavoriteDto> findFavorites(AwesomeUserDetails userDetails) {
         User user = userRepo.findByEmail(userDetails.getUsername());
-        return user.getFavorites();
+        return user.getFavorites().stream().map(f->modelMapper.map(f,FavoriteDto.class)).collect(Collectors.toList());
     }
 
     @Override

@@ -8,7 +8,7 @@ import com.waa.property_management_portal.service.impl.AwesomeUserDetails;
 import java.util.List;
 
 public interface FavoriteService {
-    List<Favorite> findFavorites(AwesomeUserDetails user);
+    List<FavoriteDto> findFavorites(AwesomeUserDetails user);
 
     void addFavorite(AwesomeUserDetails user, FavoriteDto fav);
 
