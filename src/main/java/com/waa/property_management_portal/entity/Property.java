@@ -2,6 +2,8 @@ package com.waa.property_management_portal.entity;
 
 import com.waa.property_management_portal.enums.PropertyStatus;
 import com.waa.property_management_portal.enums.PropertyType;
+import com.waa.property_management_portal.enums.UserRole;
+import com.waa.property_management_portal.util.Util;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -47,9 +49,16 @@ public class Property {
     private List<String> actions;
     public List<String> getActions(){
         List<String> actions=new ArrayList<>();
-        Object[] objects = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toArray();
-        System.out.println(Arrays.toString(objects));
-        actions.add("ACT");
+        if(getPropertyStatus().name().equals(PropertyStatus.ACTIVE.name()) || getPropertyStatus().name().equals(PropertyStatus.INACTIVE.name())){
+            actions.add("Delete Property");
+            actions.add("Edit Property");
+        }
+//        if(Util.loggedInUserHasRole(UserRole.ADMIN.name())){
+//            if(getPropertyStatus().name().equals(PropertyStatus.PENDING.name())){
+//
+//            }
+//        } else if (Util.loggedInUserHasRole(UserRole.OWNER.name())) {
+//        }
         return actions;
     }
 }

@@ -101,6 +101,8 @@ public class PropertyServiceImpl implements PropertyService {
     public void addProperty(AwesomeUserDetails user, PropertyDtoReq p) {
         User u = userRepo.findByEmail(user.getUsername());
         Property property = modelMapper.map(p, Property.class);
+        property.setOwner(u);
+        property.setPropertyStatus(PropertyStatus.ACTIVE);
 //        property.setAddress(modelMapper.map(p.getAddress(), Address.class));
         PropertyDetails propertyDetails = modelMapper.map(p, PropertyDetails.class);
         propertyDetails.setProperty(null);

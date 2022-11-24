@@ -2,6 +2,7 @@ package com.waa.property_management_portal.entity;
 
 import com.waa.property_management_portal.enums.UserRole;
 import com.waa.property_management_portal.enums.UserStatus;
+import com.waa.property_management_portal.util.Util;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -62,7 +63,7 @@ public class User {
     private List<String> actions;
     public List<String> getActions(){
         List<String> actions=new ArrayList<>();
-        if(isRole(UserRole.ADMIN.name()) && this.getStatus()!=null){
+        if(Util.loggedInUserHasRole(UserRole.ADMIN.name()) && this.getStatus()!=null){
             if(this.getStatus().equals(UserStatus.ACTIVE)){
                 actions.add(UserStatus.INACTIVE.name());
                 actions.add("Reset Password");
@@ -74,13 +75,5 @@ public class User {
         }
         return actions;
     }
-    public boolean isRole(String role){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if(authentication!=null){
-            Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-            List<String> collect = authorities.stream().map(a -> a.getAuthority()).collect(Collectors.toList());
-            return collect.contains(role);
-        }
-        return false;
-    }
+
 }
