@@ -9,7 +9,7 @@ import javax.validation.constraints.NotEmpty;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class OfferDto {
+public class OfferDtoRequest {
     @DecimalMin(message = "Please enter your a reasonable price",value = "1")
 //    @NotEmpty(message = "Please enter a valid price")
     private double price;

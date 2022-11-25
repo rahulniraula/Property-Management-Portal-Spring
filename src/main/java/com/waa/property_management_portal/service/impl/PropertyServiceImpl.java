@@ -1,12 +1,14 @@
 package com.waa.property_management_portal.service.impl;
 
-import com.waa.property_management_portal.entity.Address;
+import com.waa.property_management_portal.entity.Offer;
 import com.waa.property_management_portal.entity.Property;
 import com.waa.property_management_portal.entity.PropertyDetails;
 import com.waa.property_management_portal.entity.User;
-import com.waa.property_management_portal.entity.dto.request.OfferDto;
+import com.waa.property_management_portal.entity.dto.request.OfferDtoRequest;
 import com.waa.property_management_portal.entity.dto.request.PropertyDtoReq;
+import com.waa.property_management_portal.entity.dto.response.OfferDtoResponse;
 import com.waa.property_management_portal.entity.dto.response.PropertyDtoRes;
+import com.waa.property_management_portal.enums.OfferStatus;
 import com.waa.property_management_portal.enums.PropertyStatus;
 import com.waa.property_management_portal.model.PropertySearchCriteria;
 import com.waa.property_management_portal.repository.PropertyRepo;
@@ -117,8 +119,16 @@ public class PropertyServiceImpl implements PropertyService {
         property.setPropertyStatus(status);
         propertyRepo.save(property);
     }
-    public List<OfferDto> getOffers(long productId){
+    public List<OfferDtoResponse> getOffers(long productId){
         Property property = propertyRepo.findById(productId);
-        return property.getOffers().stream().map(o->modelMapper.map(o, OfferDto.class)).collect(Collectors.toList());
+        return property.getOffers().stream().map(o->modelMapper.map(o, OfferDtoResponse.class)).collect(Collectors.toList());
+    }
+    @Override
+    public void cancelContingency(long id) {
+        Property property = propertyRepo.findById(id);
+        if(property.getPropertyStatus().equals(PropertyStatus.CONTINGENT)){
+            property.setPropertyStatus(PropertyStatus.PENDING);
+        }
+        propertyRepo.save(property);
     }
 }

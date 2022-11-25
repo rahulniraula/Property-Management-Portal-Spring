@@ -1,6 +1,6 @@
 package com.waa.property_management_portal.controller;
 
-import com.waa.property_management_portal.entity.dto.request.OfferDto;
+import com.waa.property_management_portal.entity.dto.request.OfferDtoRequest;
 import com.waa.property_management_portal.enums.OfferStatus;
 import com.waa.property_management_portal.service.OfferService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ public class OfferController {
     private OfferService offerService;
 
     @GetMapping("/")
-    public List<OfferDto> getOffers(){
+    public List<OfferDtoRequest> getOffers(){
         return offerService.getAll();
     }
 
@@ -26,7 +26,7 @@ public class OfferController {
         offerService.updateStatus(id, status);
     }
     @PostMapping("/")
-    public OfferDto save(@Valid @RequestBody OfferDto offerDto){
+    public OfferDtoRequest save(@Valid @RequestBody OfferDtoRequest offerDto){
         return offerService.createOffer(offerDto);
     }
 }

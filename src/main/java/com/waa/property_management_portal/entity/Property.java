@@ -65,12 +65,16 @@ public class Property {
             actions.add("Delete Property");
             actions.add("Edit Property");
         }
-//        if(Util.loggedInUserHasRole(UserRole.ADMIN.name())){
-//            if(getPropertyStatus().name().equals(PropertyStatus.PENDING.name())){
-//
-//            }
-//        } else if (Util.loggedInUserHasRole(UserRole.OWNER.name())) {
-//        }
+        if(getPropertyStatus().name().equals(PropertyStatus.CONTINGENT.name())){
+            actions.add("Cancel Contingency");
+        }
+        if(Util.loggedInUserHasRole(UserRole.ADMIN.name())){
+            actions.add("Show Offers");
+            if(getPropertyStatus().name().equals(PropertyStatus.PENDING.name())){
+
+            }
+        } else if (Util.loggedInUserHasRole(UserRole.OWNER.name())) {
+        }
         return actions;
     }
 }
