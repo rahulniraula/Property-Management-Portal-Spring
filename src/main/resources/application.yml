@@ -19,14 +19,14 @@ spring:
     init:
       mode: always
   mail:
-    host: smtp.gmail.com
-    port: 587
-    username:
-    password:
+    host: smtp.mailtrap.io
+    port: 2525
+    username: 8b42669e2ae319
+    password: 1c219289370a09
     properties:
       mail:
         smtp:
-          auth: true
+          auth: plain
           starttls:
             enable: true
 server:
