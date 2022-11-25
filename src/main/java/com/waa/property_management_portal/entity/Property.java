@@ -43,6 +43,7 @@ public class Property {
     private PropertyDetails details;
 
     @OneToMany(mappedBy = "property", fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Image> images;
     @OneToMany(mappedBy = "property")
     private List<Offer> offers;
