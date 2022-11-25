@@ -1,12 +1,15 @@
 package com.waa.property_management_portal.controller;
 
 import com.waa.property_management_portal.entity.dto.request.UserDtoRequest;
+import com.waa.property_management_portal.entity.dto.response.OfferDtoResponse;
 import com.waa.property_management_portal.entity.dto.response.PropertyDtoRes;
 import com.waa.property_management_portal.entity.dto.response.UserDtoResponse;
 import com.waa.property_management_portal.enums.UserStatus;
 import com.waa.property_management_portal.service.UserService;
+import com.waa.property_management_portal.service.impl.AwesomeUserDetails;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -58,4 +61,9 @@ public class UserController {
     public void updateStatus(@PathVariable long id, @PathVariable UserStatus status) {
         userService.updateStatus(id, status);
     }
+    @GetMapping("/{id}/offers")
+    public List<OfferDtoResponse> getOffers(@AuthenticationPrincipal AwesomeUserDetails user,@PathVariable long id){
+        return userService.getOffers(user,id);
+    }
+
 }

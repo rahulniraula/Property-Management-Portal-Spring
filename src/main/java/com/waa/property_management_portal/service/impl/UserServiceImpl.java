@@ -3,6 +3,7 @@ package com.waa.property_management_portal.service.impl;
 import com.waa.property_management_portal.entity.Property;
 import com.waa.property_management_portal.entity.User;
 import com.waa.property_management_portal.entity.dto.request.UserDtoRequest;
+import com.waa.property_management_portal.entity.dto.response.OfferDtoResponse;
 import com.waa.property_management_portal.entity.dto.response.PropertyDtoRes;
 import com.waa.property_management_portal.entity.dto.response.UserDtoResponse;
 import com.waa.property_management_portal.enums.UserRole;
@@ -85,5 +86,11 @@ public class UserServiceImpl implements UserService {
         User user = userRepo.findById(id);
         user.setStatus(status);
         userRepo.save(user);
+    }
+
+    @Override
+    public List<OfferDtoResponse> getOffers(AwesomeUserDetails user,long id) {
+        User use=userRepo.findByEmail(user.getUsername());
+        return use.getOffers().stream().map(offer -> modelMapper.map(offer,OfferDtoResponse.class)).collect(Collectors.toList());
     }
 }
