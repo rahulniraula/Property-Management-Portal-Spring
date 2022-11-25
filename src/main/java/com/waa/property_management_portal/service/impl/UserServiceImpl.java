@@ -2,6 +2,7 @@ package com.waa.property_management_portal.service.impl;
 
 import com.waa.property_management_portal.entity.Property;
 import com.waa.property_management_portal.entity.User;
+import com.waa.property_management_portal.entity.dto.request.PasswordDto;
 import com.waa.property_management_portal.entity.dto.request.UserDtoRequest;
 import com.waa.property_management_portal.entity.dto.response.OfferDtoResponse;
 import com.waa.property_management_portal.entity.dto.response.PropertyDtoRes;
@@ -11,6 +12,7 @@ import com.waa.property_management_portal.enums.UserStatus;
 import com.waa.property_management_portal.repository.RoleRepository;
 import com.waa.property_management_portal.repository.UserRepo;
 import com.waa.property_management_portal.service.UserService;
+import com.waa.property_management_portal.util.Util;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -49,7 +51,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User save(UserDtoRequest u) {
         String role = u.getRole().name();
-        if (role.equals(UserRole.ADMIN)) {
+        if (role.equals(UserRole.ADMIN.name())) {
             throw new RuntimeException("You can not register as an admin.");
         }
         User user = modelMapper.map(u, User.class);
@@ -93,5 +95,15 @@ public class UserServiceImpl implements UserService {
     public List<OfferDtoResponse> getOffers(AwesomeUserDetails user,long id) {
         User use=userRepo.findByEmail(user.getUsername());
         return use.getOffers().stream().map(offer -> modelMapper.map(offer,OfferDtoResponse.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public void resetPassword(long id, PasswordDto p) {
+        if (!Util.loggedInUserHasRole(UserRole.ADMIN.name())) {
+            throw new RuntimeException("Only Admin can reset password!");
+        }
+        User user = userRepo.findById(id);
+        user.setPassword(passwordEncoder.encode(p.getPassword()));
+        userRepo.save(user);
     }
 }

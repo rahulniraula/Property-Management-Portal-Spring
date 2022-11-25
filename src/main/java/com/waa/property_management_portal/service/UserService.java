@@ -1,6 +1,7 @@
 package com.waa.property_management_portal.service;
 
 import com.waa.property_management_portal.entity.User;
+import com.waa.property_management_portal.entity.dto.request.PasswordDto;
 import com.waa.property_management_portal.entity.dto.request.UserDtoRequest;
 import com.waa.property_management_portal.entity.dto.response.OfferDtoResponse;
 import com.waa.property_management_portal.entity.dto.response.PropertyDtoRes;
@@ -25,4 +26,6 @@ public interface UserService {
 
     void updateStatus(long id, UserStatus status);
     public List<OfferDtoResponse> getOffers(AwesomeUserDetails user,long id);
+
+    void resetPassword(long id, PasswordDto newPassword);
 }

@@ -1,5 +1,6 @@
 package com.waa.property_management_portal.controller;
 
+import com.waa.property_management_portal.entity.dto.request.PasswordDto;
 import com.waa.property_management_portal.entity.dto.request.UserDtoRequest;
 import com.waa.property_management_portal.entity.dto.response.OfferDtoResponse;
 import com.waa.property_management_portal.entity.dto.response.PropertyDtoRes;
@@ -64,6 +65,11 @@ public class UserController {
     @GetMapping("/{id}/offers")
     public List<OfferDtoResponse> getOffers(@AuthenticationPrincipal AwesomeUserDetails user,@PathVariable long id){
         return userService.getOffers(user,id);
+    }
+
+    @PutMapping("/{id}/reset-password")
+    public void resetPassword(@PathVariable long id, @RequestBody PasswordDto newPassword) {
+        userService.resetPassword(id, newPassword);
     }
 
 }
