@@ -42,7 +42,7 @@ public class Property {
     @OneToOne(cascade = CascadeType.ALL)
     private PropertyDetails details;
 
-    @OneToMany(mappedBy = "property")
+    @OneToMany(mappedBy = "property", fetch = FetchType.EAGER)
     private List<Image> images;
     @OneToMany(mappedBy = "property")
     private List<Offer> offers;
