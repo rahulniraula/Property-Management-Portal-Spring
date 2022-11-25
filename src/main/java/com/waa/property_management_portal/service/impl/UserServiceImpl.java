@@ -92,9 +92,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<OfferDtoResponse> getOffers(AwesomeUserDetails user,long id) {
-        User use=userRepo.findByEmail(user.getUsername());
-        return use.getOffers().stream().map(offer -> modelMapper.map(offer,OfferDtoResponse.class)).collect(Collectors.toList());
+    public List<OfferDtoResponse> getOffers(AwesomeUserDetails u, long id) {
+        User user = userRepo.findByEmail(u.getUsername());
+        return user.getOffers()
+                .stream()
+                .map(offer -> modelMapper.map(offer,OfferDtoResponse.class))
+                .collect(Collectors.toList());
     }
 
     @Override
