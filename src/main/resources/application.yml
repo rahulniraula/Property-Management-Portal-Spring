@@ -18,16 +18,7 @@ spring:
   sql:
     init:
       mode: always
-  mail:
-    host: smtp.gmail.com
-    port: 587
-    username:
-    password:
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
+
 server:
   port: 8080
+sendgrid_key: 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

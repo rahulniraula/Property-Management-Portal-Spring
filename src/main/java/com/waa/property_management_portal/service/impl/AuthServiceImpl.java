@@ -77,7 +77,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public UserDtoResponse registerUser(UserDtoRequest u) {
         User user = userService.save(u);
-        emailService.sendMail(new EmailDetails(user.getEmail(), "Testing Email Sending","Hi, This is Testing"));
+        emailService.sendEmail(new EmailDetails(user.getEmail(), "Testing Email Sending","Hi, This is Testing"));
         return modelMapper.map(user, UserDtoResponse.class);
     }
 }

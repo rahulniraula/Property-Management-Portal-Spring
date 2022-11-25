@@ -118,5 +118,6 @@ public class UserServiceImpl implements UserService {
         User user = userRepo.findById(id);
         user.setStatus(status);
         userRepo.save(user);
+
     }
 }
