@@ -11,6 +11,7 @@ import com.waa.property_management_portal.entity.dto.response.PropertyDtoRes;
 import com.waa.property_management_portal.enums.OfferStatus;
 import com.waa.property_management_portal.enums.PropertyStatus;
 import com.waa.property_management_portal.enums.PropertyType;
+import com.waa.property_management_portal.enums.UserRole;
 import com.waa.property_management_portal.model.PropertySearchCriteria;
 import com.waa.property_management_portal.repository.PropertyRepo;
 import com.waa.property_management_portal.repository.UserRepo;
@@ -162,10 +163,13 @@ public class PropertyServiceImpl implements PropertyService {
 
     @Override
     public List<PropertyDtoRes> findPropertiesForLoggedInUser() {
-        User u = userRepo.findByEmail(Util.getLoggedInUserName());
-        return u.getProperties().stream()
-                .map(p -> modelMapper.map(p, PropertyDtoRes.class))
-                .collect(Collectors.toList());
+        if (!Util.loggedInUserHasRole(UserRole.ADMIN.name())) {
+            User u = userRepo.findByEmail(Util.getLoggedInUserName());
+            return u.getProperties().stream()
+                    .map(p -> modelMapper.map(p, PropertyDtoRes.class))
+                    .collect(Collectors.toList());
+        }
+        return findAll();
     }
 
 }
