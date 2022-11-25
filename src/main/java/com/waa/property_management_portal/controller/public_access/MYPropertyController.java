@@ -11,6 +11,7 @@ import javax.mail.MessagingException;
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/public/properties")
@@ -22,8 +23,10 @@ public class MYPropertyController {
     @Autowired
     private EmailService emailService;
     @GetMapping("/")
-    public List<PropertyDtoRes> getProperties(@RequestBody(required = false) PropertySearchCriteria searchCriteria) throws IOException, MessagingException {
+    public List<PropertyDtoRes> getProperties(@RequestParam(required = false) Map<String,String> searchCriteria) {
+
         if (searchCriteria != null) {
+            System.out.println("Entered");
             return propertyService.findAllWithFilters(searchCriteria);
         }
         return propertyService.findAll();

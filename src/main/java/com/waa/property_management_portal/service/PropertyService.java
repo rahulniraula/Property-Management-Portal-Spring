@@ -10,11 +10,12 @@ import com.waa.property_management_portal.model.PropertySearchCriteria;
 import com.waa.property_management_portal.service.impl.AwesomeUserDetails;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PropertyService {
     List<PropertyDtoRes> findAll();
 
-    List<PropertyDtoRes> findAllWithFilters(PropertySearchCriteria searchCriteria);
+    List<PropertyDtoRes> findAllWithFilters(Map<String,String> searchCriteria);
 
     PropertyDtoRes findById(long id);
 

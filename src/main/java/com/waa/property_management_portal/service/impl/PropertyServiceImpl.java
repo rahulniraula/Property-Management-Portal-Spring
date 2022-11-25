@@ -10,6 +10,7 @@ import com.waa.property_management_portal.entity.dto.response.OfferDtoResponse;
 import com.waa.property_management_portal.entity.dto.response.PropertyDtoRes;
 import com.waa.property_management_portal.enums.OfferStatus;
 import com.waa.property_management_portal.enums.PropertyStatus;
+import com.waa.property_management_portal.enums.PropertyType;
 import com.waa.property_management_portal.model.PropertySearchCriteria;
 import com.waa.property_management_portal.repository.PropertyRepo;
 import com.waa.property_management_portal.repository.UserRepo;
@@ -26,6 +27,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -60,7 +62,8 @@ public class PropertyServiceImpl implements PropertyService {
     }
 
     @Override
-    public List<PropertyDtoRes> findAllWithFilters(PropertySearchCriteria searchCriteria) {
+    public List<PropertyDtoRes> findAllWithFilters(Map<String,String> searchCriteria) {
+        System.out.println("In criteria");
         CriteriaQuery<Property> query = criteriaBuilder.createQuery(Property.class);
         Root<Property> root = query.from(Property.class);
         Predicate predicate = getPredicate(searchCriteria, root);
@@ -72,11 +75,29 @@ public class PropertyServiceImpl implements PropertyService {
                 .collect(Collectors.toList());
     }
 
-    private Predicate getPredicate(PropertySearchCriteria searchCriteria, Root<Property> root) {
+    private Predicate getPredicate(Map<String,String> searchCriteria, Root<Property> root) {
         List<Predicate> predicates = new ArrayList<>();
-        if (!searchCriteria.getTitle().isEmpty()) {
-            predicates.add(criteriaBuilder.like(root.get("title"), "%" + searchCriteria.getTitle() + "%"));
+        if (searchCriteria.get("title")!=null && !searchCriteria.get("title").isEmpty()) {
+            predicates.add(criteriaBuilder.like(root.get("title"), "%" + searchCriteria.get("title") + "%"));
         }
+        if(searchCriteria.get("propertyType")!=null && !searchCriteria.get("propertyType").isEmpty()){
+            predicates.add(criteriaBuilder.equal(root.get("propertyType"), PropertyType.valueOf(searchCriteria.get("propertyType"))));
+        }
+        if(searchCriteria.get("propertyStatus")!=null && !searchCriteria.get("propertyStatus").isEmpty()){
+            predicates.add(criteriaBuilder.equal(root.get("propertyStatus"), PropertyStatus.valueOf(searchCriteria.get("propertyStatus"))));
+        }
+        if(searchCriteria.get("maxPrice")!=null && !searchCriteria.get("maxPrice").isEmpty()){
+            predicates.add(criteriaBuilder.le(root.get("price"),Integer.valueOf(searchCriteria.get("maxPrice"))));
+        }
+        if(searchCriteria.get("minPrice")!=null && !searchCriteria.get("minPrice").isEmpty()){
+            predicates.add(criteriaBuilder.ge(root.get("price"),Integer.valueOf(searchCriteria.get("minPrice"))));
+        }
+//        if(searchCriteria.get("area")!=null && !searchCriteria.get("area").isEmpty()){
+//            predicates.add(criteriaBuilder.le(root.get("area"),Integer.valueOf(searchCriteria.get("area"))));
+//        }
+//        if(searchCriteria.get("noOfRooms")!=null && !searchCriteria.get("noOfRooms").isEmpty()){
+//            predicates.add(criteriaBuilder.le(root.get("noOfRooms"),Integer.valueOf(searchCriteria.get("noOfRooms"))));
+//        }
         return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
     }
 
