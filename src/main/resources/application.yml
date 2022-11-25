@@ -32,4 +32,4 @@ spring:
 
 server:
   port: 8080
-sendgrid_key: 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
+sendgrid_key: API_KEY

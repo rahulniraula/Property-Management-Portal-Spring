@@ -11,8 +11,6 @@ import lombok.NoArgsConstructor;
 public class EmailDetails {
     private String to;
     private String subject;
-    private String Body;
-
-    //private String attachment;
+    private String body;
 }
 

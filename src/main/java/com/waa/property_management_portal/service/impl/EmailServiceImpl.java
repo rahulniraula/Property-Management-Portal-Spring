@@ -19,7 +19,7 @@ public class EmailServiceImpl implements EmailService {
     @Autowired
     SendGrid sendGrid;
     public Response sendEmail(EmailDetails emailDetail){
-       Email from = new Email("sujan.a13@gmail.com");
+       Email from = new Email("fuadmail@gmail.com");
        String subject = emailDetail.getSubject();
        Email to = new Email(emailDetail.getTo());
        Content content = new Content("text/plain", emailDetail.getBody());

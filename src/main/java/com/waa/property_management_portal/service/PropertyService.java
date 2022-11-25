@@ -31,4 +31,5 @@ public interface PropertyService {
     public List<OfferDtoResponse> getOffers(long productId);
     public void cancelContingency(long id);
 
+    String getUserEmail(long id);
 }

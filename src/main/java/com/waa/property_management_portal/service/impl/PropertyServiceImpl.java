@@ -152,4 +152,11 @@ public class PropertyServiceImpl implements PropertyService {
         }
         propertyRepo.save(property);
     }
+
+    @Override
+    public String getUserEmail(long id) {
+        Property property = propertyRepo.findById(id);
+        return property.getOwner().getEmail();
+    }
+
 }
