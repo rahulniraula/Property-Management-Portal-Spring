@@ -20,7 +20,6 @@ public class PropertyDetails {
     private String heatingSystem;
     private String coolingSystem;
     private String parking;
-    @Lob
     private String description;
     private long noOfViews;
 

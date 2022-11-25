@@ -21,6 +21,6 @@ public class Favorite {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     List<Property> properties;
 }

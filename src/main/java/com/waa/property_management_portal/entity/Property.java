@@ -44,7 +44,19 @@ public class Property {
 
     @OneToMany(mappedBy = "property")
     private List<Image> images;
-
+    @OneToMany(mappedBy = "property")
+    private List<Offer> offers;
+    @Transient
+    private boolean offered;
+    private boolean getOffered() {
+        String username = Util.getLoggedInUserName();
+        if (this.getOffers()
+                .stream()
+                .anyMatch(offer -> offer.getUser().getEmail().equals(username))){
+            return true;
+        }
+        return false;
+    }
     @Transient
     private List<String> actions;
     public List<String> getActions(){
@@ -53,12 +65,16 @@ public class Property {
             actions.add("Delete Property");
             actions.add("Edit Property");
         }
-//        if(Util.loggedInUserHasRole(UserRole.ADMIN.name())){
-//            if(getPropertyStatus().name().equals(PropertyStatus.PENDING.name())){
-//
-//            }
-//        } else if (Util.loggedInUserHasRole(UserRole.OWNER.name())) {
-//        }
+        if(getPropertyStatus().name().equals(PropertyStatus.CONTINGENT.name())){
+            actions.add("Cancel Contingency");
+        }
+        if(Util.loggedInUserHasRole(UserRole.ADMIN.name())){
+            actions.add("Show Offers");
+            if(getPropertyStatus().name().equals(PropertyStatus.PENDING.name())){
+
+            }
+        } else if (Util.loggedInUserHasRole(UserRole.OWNER.name())) {
+        }
         return actions;
     }
 }

@@ -12,7 +12,6 @@ public class PropertyManagementPortalSpringApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(PropertyManagementPortalSpringApplication.class, args);
-
     }
 
     @Bean

@@ -8,6 +8,8 @@ import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -26,7 +28,20 @@ public class Offer {
     @Enumerated(EnumType.STRING)
     private OfferStatus status;
 
+    @Transient
+    private List<String> actions;
+    public List<String> getActions() {
+        List<String> actions = new ArrayList<>();
+        if(!getStatus().name().equals(OfferStatus.ACCEPTED.name())){
+            actions.add("Accept Offer");
+            actions.add("Reject Offer");
+        }
+        return actions;
+    }
     @ManyToOne
     @JoinColumn(name="user_id")
     private User user;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "property_id")
+    private Property property;
 }

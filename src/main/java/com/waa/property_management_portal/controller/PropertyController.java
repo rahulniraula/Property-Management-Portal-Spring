@@ -1,13 +1,14 @@
 package com.waa.property_management_portal.controller;
 
+import com.waa.property_management_portal.entity.dto.request.OfferDtoRequest;
 import com.waa.property_management_portal.entity.dto.request.PropertyDtoReq;
+import com.waa.property_management_portal.entity.dto.response.OfferDtoResponse;
 import com.waa.property_management_portal.entity.dto.response.PropertyDtoRes;
 import com.waa.property_management_portal.enums.PropertyStatus;
 import com.waa.property_management_portal.model.PropertySearchCriteria;
 import com.waa.property_management_portal.service.PropertyService;
 import com.waa.property_management_portal.service.impl.AwesomeUserDetails;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
@@ -17,7 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/properties")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-//@Transactional
+@Transactional
 public class PropertyController {
 
     private PropertyService propertyService;
@@ -42,5 +43,13 @@ public class PropertyController {
     @PutMapping("/{id}/{status}")
     public void updateStatus(@PathVariable long id, @PathVariable PropertyStatus status) {
         propertyService.updateStatus(id, status);
+    }
+    @GetMapping("/{id}/offers")
+    public List<OfferDtoResponse> getOffers(@PathVariable Long id){
+        return propertyService.getOffers(id);
+    }
+    @PutMapping("/{id}/cancel-contingency")
+    public void cancelContingency(@PathVariable Long id){
+         propertyService.cancelContingency(id);
     }
 }
