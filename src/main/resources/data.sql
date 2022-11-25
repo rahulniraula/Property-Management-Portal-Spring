@@ -56,5 +56,5 @@ INSERT INTO image(id, url, status, property_id) VALUES(4, 'http://localhost:8080
 INSERT INTO image(id, url, status, property_id) VALUES(5, 'http://localhost:8080/images/image_5.jpg', 1, 5);
 INSERT INTO image(id, url, status, property_id) VALUES(6, 'http://localhost:8080/images/image_6.jpg', 1, 6);
 INSERT INTO image(id, url, status, property_id) VALUES(7, 'http://localhost:8080/images/image_7.jpg', 1, 7);
-INSERT INTO image(id, url, status, property_id) VALUES(8, 'http://localhost:8080/images/image_8.jpg', 1, 8);
+INSERT INTO image(id, url, status, property_id) VALUES(8, 'http://localhost:8080/images/image_4.jpg', 1, 8);
 SELECT pg_catalog.setval(pg_get_serial_sequence('image', 'id'), MAX(id) + 1) FROM image;
