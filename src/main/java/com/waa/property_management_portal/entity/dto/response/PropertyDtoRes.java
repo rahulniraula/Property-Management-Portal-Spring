@@ -1,5 +1,6 @@
 package com.waa.property_management_portal.entity.dto.response;
 
+import com.waa.property_management_portal.entity.Image;
 import com.waa.property_management_portal.entity.PropertyDetails;
 import com.waa.property_management_portal.enums.PropertyStatus;
 import com.waa.property_management_portal.enums.PropertyType;
@@ -22,4 +23,5 @@ public class PropertyDtoRes {
     private PropertyDetailsDtoResponse details;
     private boolean offered;
     private PropertyStatus status;
+    private List<ImageDTO> images;
 }
