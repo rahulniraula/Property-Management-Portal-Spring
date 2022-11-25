@@ -42,6 +42,7 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .antMatchers("/api/v1/authenticate/**").permitAll()
                 .antMatchers("/api/v1/configs/**").permitAll()
+                .antMatchers("/api/v1/public/**").permitAll()
                 //TODO: Implement Access
 //                .antMatchers("/api/v1/users/**").access("hasAuthority('CLIENT') or hasAuthority('ADMIN')")
 //                .antMatchers("/api/v1/admin/**").hasAuthority("ADMIN")

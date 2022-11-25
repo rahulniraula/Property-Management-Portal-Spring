@@ -13,6 +13,8 @@ services:
       - "5432:5432"
     restart: unless-stopped
   application:
+    environment:
+      SENDGRID_API_KEY: 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
     build:
       context: .
     depends_on:
