@@ -25,7 +25,7 @@ public class MYPropertyController {
     @GetMapping("/")
     public List<PropertyDtoRes> getProperties(@RequestParam(required = false) Map<String,String> searchCriteria) {
 
-        if (searchCriteria != null) {
+        if (searchCriteria.size() > 0) {
             System.out.println("Entered");
             return propertyService.findAllWithFilters(searchCriteria);
         }

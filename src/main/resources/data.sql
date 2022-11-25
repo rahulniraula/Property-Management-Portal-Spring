@@ -24,7 +24,7 @@ SELECT pg_catalog.setval(pg_get_serial_sequence('role', 'id'), MAX(id) + 1) FROM
 INSERT INTO users_roles (user_id, roles_id)
 VALUES (111, 1);
 INSERT INTO users_roles (user_id, roles_id)
-VALUES (112, 2);
+VALUES (112, 3);
 INSERT INTO users_roles (user_id, roles_id)
 VALUES (113, 2);
 

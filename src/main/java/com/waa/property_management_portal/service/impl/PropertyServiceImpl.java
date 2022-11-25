@@ -15,6 +15,7 @@ import com.waa.property_management_portal.model.PropertySearchCriteria;
 import com.waa.property_management_portal.repository.PropertyRepo;
 import com.waa.property_management_portal.repository.UserRepo;
 import com.waa.property_management_portal.service.PropertyService;
+import com.waa.property_management_portal.util.Util;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -157,6 +158,14 @@ public class PropertyServiceImpl implements PropertyService {
     public String getUserEmail(long id) {
         Property property = propertyRepo.findById(id);
         return property.getOwner().getEmail();
+    }
+
+    @Override
+    public List<PropertyDtoRes> findPropertiesForLoggedInUser() {
+        User u = userRepo.findByEmail(Util.getLoggedInUserName());
+        return u.getProperties().stream()
+                .map(p -> modelMapper.map(p, PropertyDtoRes.class))
+                .collect(Collectors.toList());
     }
 
 }

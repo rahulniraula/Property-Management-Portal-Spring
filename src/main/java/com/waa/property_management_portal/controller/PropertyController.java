@@ -31,11 +31,10 @@ public class PropertyController {
     @GetMapping("/")
     public List<PropertyDtoRes> getProperties(@RequestParam(required = false) Map<String,String> searchCriteria) {
 
-        if (searchCriteria != null) {
-            System.out.println("Entered");
+        if (searchCriteria.size() > 0) {
             return propertyService.findAllWithFilters(searchCriteria);
         }
-        return propertyService.findAll();
+        return propertyService.findPropertiesForLoggedInUser();
     }
 
     @PostMapping("/")
