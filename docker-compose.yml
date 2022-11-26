@@ -23,7 +23,7 @@ services:
     environment:
       SENDGRID_API_KEY: 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
       POSTGRES_URL: postgres
-      SQL_INIT_MODE: always # Options: never, always
+#      SQL_INIT_MODE: always # Options: never, always
     build:
       context: .
     depends_on:
