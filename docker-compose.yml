@@ -1,6 +1,12 @@
+version: '3.9'
+
 services:
+  frontend:
+    image: rahulniraula/waa-frontend:latest
+    ports:
+      - 3000:3000
   postgres:
-    container_name: postgres-db
+    container_name: postgres
     image: postgres
     environment:
       POSTGRES_PASSWORD: 1
@@ -10,17 +16,22 @@ services:
     volumes:
       - postgres:/data/postgres
     ports:
-      - "5432:5432"
+      - 5432:5432
     restart: unless-stopped
+
   application:
     environment:
       SENDGRID_API_KEY: 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
+      POSTGRES_URL: postgres
+      SQL_INIT_MODE: always # Options: never, always
     build:
       context: .
     depends_on:
       - postgres
     ports:
-      - "8080:8080"
+      - 8080:8080
+    restart: always
+
   pgadmin:
     container_name: pgadmin-security
     image: dpage/pgadmin4

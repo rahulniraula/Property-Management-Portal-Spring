@@ -3,11 +3,11 @@ spring:
     name: "PROPERTY-MANAGEMENT-PORTAL-BACKEND"
   datasource:
     password: 1
-    url: jdbc:postgresql://localhost:5432/waa-final
+    url: jdbc:postgresql://${POSTGRES_URL:localhost}:5432/waa-final
     username: postgres
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
@@ -17,7 +17,7 @@ spring:
     generate-ddl: true
   sql:
     init:
-      mode: always
+      mode: ${SQL_INIT_MODE:never}
   mail:
     host: smtp.mailtrap.io
     port: 2525
